@@ -5,6 +5,9 @@
     <title>Foods E-commerce</title>
     <link rel="stylesheet" href="./assets/css/style.css" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Hepta+Slab:400,700|Lato:400,700&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -67,15 +70,16 @@
                 <h1>--</h1>
                 <div class="foodInfo--desc">--</div>
                 <div class="foodInfo--sizearea">
-                    <div class="foodInfo--sector">Tamanho</div>
+                    <div class="foodInfo--sector">Opção</div>
                     <div class="foodInfo--sizes">
-                        <div data-key="0" class="foodInfo--size">PEQUENA <span>--</span></div>
-                        <div data-key="1" class="foodInfo--size">MÉDIO <span>--</span></div>
-                        <div data-key="2" class="foodInfo--size selected">GRANDE <span>--</span></div>
+                        <label for="checkSmall"><div data-key="0" class="foodInfo--size foodSize"><div>Pequena <span>--</span></div><div><input onclick="markCheck(this)" type="checkbox" id="checkSmall"/></div></div></label>
+                        <label for="checkMedium"><div data-key="1" class="foodInfo--size foodSize"><div>Média <span>--</span></div><div><input onclick="markCheck(this)" type="checkbox" id="checkMedium"/></div></div></label>
+                        <label for="checkLarge"><div data-key="2" class="foodInfo--size foodSize selected"><div>Grande <span>--</span></div><div><input onclick="markCheck(this)" type="checkbox" id="checkLarge" checked/></div></div></label>
+                        <label for="checkDefault"><div data-key="3" class="foodInfo--size foodDefault selected"><div><span>--</span></div><div><input type="checkbox" id="checkDefault" onclick="markCheck(this)" checked/></div></div></label>
                     </div>
                 </div>
                 <div class="foodInfo--pricearea">
-                    <div class="foodInfo--sector">Preço</div>
+                    <div class="foodInfo--sector">Extras</div>
                     <div class="foodInfo--price">
                         <div class="foodInfo--actualPrice">R$ --</div>
                         <div class="foodInfo--qtarea">
