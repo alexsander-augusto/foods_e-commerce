@@ -190,6 +190,7 @@ h1 {
     text-align: center;
     color: #333;
     font-weight: 700;
+    margin-bottom: 0;
 }
 .foodInfo .foodInfo--desc {
     font-size:15px;
@@ -235,7 +236,7 @@ h1 {
     color:#444;
 }
 .foodInfo--size span {
-    font-size:12px;
+    font-size:14px;
     color:#999;
     font-weight: normal;
 }
