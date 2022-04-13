@@ -62,7 +62,25 @@
     </aside>
     <div class="foodWindowArea">
         <div class="foodWindowBody">
-            <div class="foodInfo--cancelMobileButton">Voltar</div>
+            <div class="foodInfo--cancelButton">
+                <img class="foodInfo--cancelButtonImg" src="./assets/images/cancelButton.png" alt="">
+            </div>
+            <div class="foodInfo--cancelMobileButton">
+                <img class="foodInfo--cancelButtonMobileImg" src="./assets/images/cancelButton.png" alt="">
+            </div>
+            <div class="foodInfo--buyarea">
+                <div class="foodInfo--qtarea">
+                    <button class="foodInfo--qtmenos">-</button>
+                    <div class="foodInfo--qt">1</div>
+                    <button class="foodInfo--qtmais">+</button>
+                </div>
+                <div class="foodInfo--addButton">
+                    Adicionar ao carrinho
+                    <div class="foodInfo--price">
+                        <div class="foodInfo--actualPrice">R$ --</div>
+                    </div>
+                </div>                    
+            </div>
             <div class="foodBig">
                 <img src="" />
             </div>
@@ -72,25 +90,16 @@
                 <div class="foodInfo--sizearea">
                     <div class="foodInfo--sector">Opção</div>
                     <div class="foodInfo--sizes">
-                        <label for="checkSmall"><div data-key="0" class="foodInfo--size foodSize"><div>Pequena <span>--</span></div><div><input onclick="markCheck(this)" type="checkbox" id="checkSmall"/></div></div></label>
-                        <label for="checkMedium"><div data-key="1" class="foodInfo--size foodSize"><div>Média <span>--</span></div><div><input onclick="markCheck(this)" type="checkbox" id="checkMedium"/></div></div></label>
-                        <label for="checkLarge"><div data-key="2" class="foodInfo--size foodSize selected"><div>Grande <span>--</span></div><div><input onclick="markCheck(this)" type="checkbox" id="checkLarge" checked/></div></div></label>
-                        <label for="checkDefault"><div data-key="3" class="foodInfo--size foodDefault selected"><div><span>--</span></div><div><input type="checkbox" id="checkDefault" onclick="markCheck(this)" checked/></div></div></label>
+                        <label for="checkSmall"><div data-key="0" class="foodInfo--size foodSize"><div>Pequena <span>--</span></div><div><input type="radio" name="radioFoodSize" id="checkSmall"/><label for="checkSmall"></label></div></div></label>
+                        <label for="checkMedium"><div data-key="1" class="foodInfo--size foodSize"><div>Média <span>--</span></div><div><input type="radio" name="radioFoodSize" id="checkMedium"/><label for="checkSmall"></label></div></div></label>
+                        <label for="checkLarge"><div data-key="2" class="foodInfo--size foodSize selected"><div>Grande <span>--</span></div><div><input type="radio" name="radioFoodSize" id="checkLarge" checked/><label for="checkSmall"></label></div></div></label>
+                        <label for="checkDefault"><div data-key="3" class="foodInfo--size foodDefault selected"><div><span>--</span></div><div><input type="radio" id="checkDefault" checked/><label for="checkSmall"></label></div></div></label>
                     </div>
                 </div>
-                <div class="foodInfo--pricearea">
-                    <div class="foodInfo--sector">Extras</div>
-                    <div class="foodInfo--price">
-                        <div class="foodInfo--actualPrice">R$ --</div>
-                        <div class="foodInfo--qtarea">
-                            <button class="foodInfo--qtmenos">-</button>
-                            <div class="foodInfo--qt">1</div>
-                            <button class="foodInfo--qtmais">+</button>
-                        </div>
-                    </div>
+                <div class="foodInfo--obsarea">
+                    <div class="foodInfo--obsareaSector">Observações</div>
+                    <div><textarea id="foodObs" maxlength="189" placeholder="Adicione uma observação sobre seu pedido"></textarea></div>
                 </div>
-                <div class="foodInfo--addButton">Adicionar ao carrinho</div>
-                <div class="foodInfo--cancelButton">Cancelar</div>
             </div>
         </div>
     </div>

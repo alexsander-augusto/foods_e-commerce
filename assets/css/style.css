@@ -152,21 +152,105 @@ h1 {
     background-color:#FFF;
     border-radius:10px;
     box-shadow:0px 0px 15px #999;
-    display:flex;
-    flex-direction: column;
-    align-items: center;
     margin:20px 0px;  
     height: 100%;  
     overflow-y:scroll;
+}
+.foodInfo--cancelButton {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    padding: 15px 20px;
+    height: 50px;
+    width: inherit;
+    position: fixed;
+    top: 0;
+    background-color: #fff;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+}
+.foodInfo--cancelButton img {
+    height: 16px;
+    cursor: pointer;
+}
+.foodInfo--cancelMobileButton {
+    display:none;
+    height:40px;
+    text-align:center;
+    line-height: 40px;
+    margin-bottom:30px;
+}
+.foodInfo--cancelMobileButton img {
+    height: 16px;
+    cursor: pointer;
+}
+.foodInfo--buyarea {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    padding: 15px 20px;
+    height: 50px;
+    width: inherit;
+    position: fixed;
+    bottom: 0;
+    background: linear-gradient(transparent, rgb(255, 255, 255) 67.76%);
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    padding-left: 30px;
+}
+.foodInfo--qtarea {
+    display:inline-flex;
+    background-color:#EEE;
+    border-radius:10px;
+    height:30px;
+    margin-right: 100px;
+}
+.foodInfo--qtarea button {
+    border:0;
+    background-color:transparent;
+    font-size:17px;
+    outline:0;
+    cursor:pointer;
+    padding:0px 10px;
+}
+.foodInfo--qt {
+    line-height: 30px;
+    font-size: 12px;
+    font-weight: bold;
+    padding: 0px 5px;
+    color:#000;
+}
+.foodInfo--addButton {
+    flex: 3;
+    padding:10px;
+    border-radius:10px;
+    background-color:#ea1d2c;
+    color:#FFF;
+    display:inline-block;
+    cursor:pointer;
+    display: flex;
+    justify-content: space-between;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+.foodInfo--addButton:hover {
+    background-color:#ea1d2c;
+}
+.foodInfo--price {
+    display:flex;
+    align-items:center;
+}
+.foodInfo--actualPrice {
+    font-size:14px;
 }
 .foodBig {
     flex:1;
     display:flex;
     justify-content: center;
     align-items: center;
-    margin-top: 50px;
     background-color: #F1F1F1;
     width: 100%;
+    margin-top: 50px;
 }
 .foodBig--back {
     position:absolute;
@@ -204,7 +288,7 @@ h1 {
     margin-right: 30px;
 }
 .foodInfo--sector {
-    color:#333;
+    color:#111;
     width: 100%;
     background-color: #F1F1F1;
     font-size:18px;
@@ -212,12 +296,13 @@ h1 {
     margin-bottom:10px;
     padding: 20px;
     padding-left: 30px;
-    font-weight: 500;
+    font-weight: 600;
 }
 .foodInfo--sizes {
     display:flex;
     flex-direction: column;
     padding-left: 30px;
+    padding-right: 30px;
 }
 .foodInfo--size {
     color:#000;
@@ -227,10 +312,11 @@ h1 {
     font-size: 18px;
     font-weight: 400;
     color:#333;
-    padding: 20px;
-    padding-left:0;
+    padding-top: 20px;
+    padding-bottom: 20px;
     display: flex;
     justify-content: space-between;
+    border-bottom: 1px solid #f1f1f1;
 }
 .foodInfo--size.selected span {
     color:#444;
@@ -240,64 +326,51 @@ h1 {
     color:#999;
     font-weight: normal;
 }
-.foodInfo--size input[type=checkbox] {
+.foodInfo--size input{
+  display: none;
 }
-.foodInfo--price {
-    display:flex;
-    align-items:center;
+.foodInfo--size input + label:before {
+    content: '';
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background-color: #fff;
+    border: 1px solid #808080;
+    display: inline-block;
+    vertical-align: middle;
+  }
+.foodInfo--size input:checked + label:before {
+    background-color: #fff;
+    box-sizing: border-box;
+    border: 5px solid #ea1d2c;
+    padding: 4px;
+    transition: all linear .1s;
+}
+.foodInfo--obsarea {
     padding-left: 30px;
-    margin-top: 25px;
+    padding-right: 30px;
 }
-.foodInfo--actualPrice {
-    font-size:28px;
-    margin-right:30px;
+.foodInfo--obsareaSector {
+    color:#111;
+    width: 100%;
+    font-size:18px;
+    margin-top:10px;
+    margin-bottom:10px;
+    padding: 20px;
+    padding-left: 0;
+    font-weight: 600;
 }
-.foodInfo--qtarea {
-    display:inline-flex;
-    background-color:#EEE;
-    border-radius:10px;
-    height:30px;
-}
-.foodInfo--qtarea button {
-    border:0;
-    background-color:transparent;
-    font-size:17px;
-    outline:0;
-    cursor:pointer;
-    padding:0px 10px;
-    color:#333;
-}
-.foodInfo--qt {
-    line-height: 30px;
-    font-size: 12px;
-    font-weight: bold;
-    padding: 0px 5px;
-    color:#000;
-}
-.foodInfo--addButton {
-    margin-top:30px;
-    padding:20px 30px;
-    border-radius:20px;
-    background-color:#48d05f;
-    color:#FFF;
-    display:inline-block;
-    cursor:pointer;
-    margin-right:30px;
-    margin-left: 30px;
-}
-.foodInfo--addButton:hover {
-    background-color:#32a345;
-}
-.foodInfo--cancelButton {
-    display:inline-block;
-    cursor:pointer;
-}
-.foodInfo--cancelMobileButton {
-    display:none;
-    height:40px;
-    text-align:center;
-    line-height: 40px;
-    margin-bottom:30px;
+.foodInfo--obsarea textarea {
+    background-color: rgb(241, 242, 244);
+    border: 0px solid transparent;
+    border-radius: 0.6rem;
+    resize: none;
+    height: 80px;
+    text-align: left;
+    padding: 1.5rem 1.5rem 0.5rem;
+    width: 100%;
+    margin-bottom: 30px;  
+    outline: 0;  
 }
 .cart {
     margin-bottom:20px;
@@ -336,6 +409,12 @@ h1 {
     font-weight: bold;
     padding: 0px 5px;
     color:#000;
+}
+.foodInfo--qtmenos {
+    color: #999;
+}
+.foodInfo--qtmais {
+    color: #ea1d2c;
 }
 .cart--totalitem {
     padding:15px 0;
