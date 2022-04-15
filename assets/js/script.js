@@ -78,19 +78,19 @@ foodJson.forEach((item, index) => {
         // Preenche o valor das Pizzas e reseta a posição do Radio Input;        
         i('checkSmall').addEventListener('click', () => {
             i('checkSmall').checked = true;
-            if(foodJson[key].id = 1) {
+            if(foodJson[key].id == 1) {
                 c('.foodInfo--actualPrice').innerHTML = `R$ ${foodJson[key].price[0].toFixed(2).toString().replace(".",",")}`;
             }
         });
         i('checkMedium').addEventListener('click', () => {
             i('checkMedium').checked = true;
-            if(foodJson[key].id = 2) {
+            if(foodJson[key].id == 2) {
                 c('.foodInfo--actualPrice').innerHTML = `R$ ${foodJson[key].price[1].toFixed(2).toString().replace(".",",")}`;
             }
         });
         i('checkLarge').addEventListener('click', () => {
             i('checkLarge').checked = true;
-            if(foodJson[key].id = 3) {
+            if(foodJson[key].id == 3) {
                 c('.foodInfo--actualPrice').innerHTML = `R$ ${foodJson[key].price[2].toFixed(2).toString().replace(".",",")}`;
             }
         });
@@ -184,6 +184,10 @@ c('.foodInfo--addButton').addEventListener('click', () => {
     closeModal();
 });
 
+// Define as cores inicais dos botões de quantidade do carrinho de compras;
+c('.cart--item-qtmenos').style.color = "#999";
+c('.cart--item-qtmais').style.color = "#ea1d2c";
+
 // Função pra atualizar o carrinho de compras;
 function updateCart() {
     if(cart.length > 0) {
@@ -191,6 +195,10 @@ function updateCart() {
 
         // Reseta a listagem dos itens do carrinho de compras;
         c('.cart').innerHTML = '';
+
+        let subtotal = 0;
+        let desconto = 0;
+        let total = 0;
 
         for(let i in cart) {
 
@@ -218,11 +226,29 @@ function updateCart() {
             // Preenche as informações em .cart-item; 
             cartItem.querySelector('img').src = foodItem.img;
             cartItem.querySelector('.cart--item-nome').innerHTML = foodName;
+            cartItem.querySelector('.cart--item--qt').innerHTML = cart[i].qt;
+
+            // Insere ação dos botões de quantidade do carrinho de compras;
+            cartItem.querySelector('.cart--item-qtmenos').addEventListener('click', () => {
+                if(cart[i].qt > 2) {
+                    cart[i].qt--;
+                } else if(cart[i].qt == 2) {
+                    c('.cart--item-qtmenos').style.color = "#999";
+                    cart[i].qt--;
+                } else {
+                    cart.splice(i, 1);
+                };
+                updateCart();
+            });
+            cartItem.querySelector('.cart--item-qtmais').addEventListener('click', () => {
+                c('.cart--item-qtmenos').style.color = "#ea1d2c";
+                cart[i].qt++;
+                updateCart();
+            });
 
             // Adiciona conteúdos a estrutura .cart-item;
             c('.cart').append(cartItem);
         }
-
     } else {
         c('aside').classList.remove('show');
     }
