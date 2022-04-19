@@ -78,19 +78,19 @@ foodJson.forEach((item, index) => {
         // Preenche o valor das Pizzas e reseta a posição do Radio Input;        
         i('checkSmall').addEventListener('click', () => {
             i('checkSmall').checked = true;
-            if(foodJson[key].id == 1) {
+            if(foodJson[key].sizes[0]) {
                 c('.foodInfo--actualPrice').innerHTML = `R$ ${foodJson[key].price[0].toFixed(2).toString().replace(".",",")}`;
             }
         });
         i('checkMedium').addEventListener('click', () => {
             i('checkMedium').checked = true;
-            if(foodJson[key].id == 2) {
+            if(foodJson[key].sizes[1]) {
                 c('.foodInfo--actualPrice').innerHTML = `R$ ${foodJson[key].price[1].toFixed(2).toString().replace(".",",")}`;
             }
         });
         i('checkLarge').addEventListener('click', () => {
             i('checkLarge').checked = true;
-            if(foodJson[key].id == 3) {
+            if(foodJson[key].sizes[2]) {
                 c('.foodInfo--actualPrice').innerHTML = `R$ ${foodJson[key].price[2].toFixed(2).toString().replace(".",",")}`;
             }
         });
@@ -184,12 +184,27 @@ c('.foodInfo--addButton').addEventListener('click', () => {
     closeModal();
 });
 
+
+// Função pra abrir e fechar o carrinho de compras mobile;
+c('.menu-openner').addEventListener('click', () => {
+    if(cart.length > 0) {
+        c('aside').style.left = '0';
+    }
+});
+c('.menu-closer').addEventListener('click', () => {
+        c('aside').style.left = '100vw';
+});
+
 // Define as cores inicais dos botões de quantidade do carrinho de compras;
 c('.cart--item-qtmenos').style.color = "#999";
 c('.cart--item-qtmais').style.color = "#ea1d2c";
 
 // Função pra atualizar o carrinho de compras;
 function updateCart() {
+
+    // Atualiza o número de itens no carrinho de compras mobile;
+    c('.menu-openner span').innerHTML = cart.length;
+
     if(cart.length > 0) {
         c('aside').classList.add('show');
 
@@ -204,6 +219,19 @@ function updateCart() {
 
             // Acessa as informações da comida selecionada;
             let foodItem = foodJson.find((item) => item.id == cart[i].id);
+
+            // Cálculo do subtotal;
+            switch(cart[i].size) {
+                case 0:
+                    subtotal += foodItem.price[0] * cart[i].qt;
+                    break;
+                case 1: 
+                subtotal += foodItem.price[1] * cart[i].qt;
+                    break;
+                case 2:
+                    subtotal += foodItem.price[2] * cart[i].qt;
+                    break;
+            };
 
             // Clona o carrinho de compras;
             let cartItem = c('.models .cart--item').cloneNode(true);
@@ -249,7 +277,17 @@ function updateCart() {
             // Adiciona conteúdos a estrutura .cart-item;
             c('.cart').append(cartItem);
         }
+
+        desconto = subtotal * 0.1;
+        total = subtotal - desconto;
+
+        // Adiciona os valores no carrinho de compras;
+        c('.subtotal span:last-child').innerHTML = `R$ ${subtotal.toFixed(2)}`;
+        c('.desconto span:last-child').innerHTML = `R$ ${desconto.toFixed(2)}`;
+        c('.total span:last-child').innerHTML = `R$ ${total.toFixed(2)}`;
+
     } else {
         c('aside').classList.remove('show');
+        c('aside').style.left = '100vw';
     }
 };
