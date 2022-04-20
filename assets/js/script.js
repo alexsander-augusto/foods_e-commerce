@@ -14,7 +14,7 @@ foodJson.forEach((item, index) => {
     // Clona a estrutura .food-item;
     let foodItem = c('.models .food-item').cloneNode(true);
 
-    // Adiciona conteúdos a estrutura .food-item;
+    // Adiciona os elementos clonados de 'foodItem' em 'food-area';
     c('.food-area').append(foodItem);
 
     // Define uma chave pra cada item clicado;
@@ -184,6 +184,14 @@ c('.foodInfo--addButton').addEventListener('click', () => {
     closeModal();
 });
 
+c('.headerCart').addEventListener('click', () => {
+    if(cart.length > 0) {
+        c('aside').classList.add('show');
+    }
+});
+i('cancelButton').addEventListener('click', () => {
+    c('aside').classList.remove('show');
+});
 
 // Função pra abrir e fechar o carrinho de compras mobile;
 c('.menu-openner').addEventListener('click', () => {
