@@ -28,7 +28,7 @@ foodJson.forEach((item, index) => {
     foodItem.querySelector('.food-item--desc').innerHTML = item.description;
     
     // Adiciona evento de click na tag 'a';
-    foodItem.querySelector('a').addEventListener('click', (e) => {
+    foodItem.querySelector('.food-item--block').addEventListener('click', (e) => {
 
         // Previne a ação padrão (atualizar a página);
         e.preventDefault();
@@ -117,6 +117,19 @@ foodJson.forEach((item, index) => {
     });
 });
 
+// Evento do botão de compartilhamento;
+let compartilharRed = i('compartilharImgRed');
+let compartilharWhite = i('compartilharImgWhite');
+
+c('.main-area--links a:last-child').addEventListener('mouseover', () => {
+    compartilharRed.style.display = 'none';
+    compartilharWhite.style.display = 'flex';
+});
+c('.main-area--links a:last-child').addEventListener('mouseout', () => {
+    compartilharRed.style.display = 'flex';
+    compartilharWhite.style.display = 'none';
+});
+
 // Eventos do Modal:
 
 // Fecha o Modal;
@@ -203,7 +216,7 @@ c('.menu-closer').addEventListener('click', () => {
         c('aside').style.left = '100vw';
 });
 
-// Define as cores inicais dos botões de quantidade do carrinho de compras;
+// Define as cores inicias dos botões de quantidade do carrinho de compras;
 c('.cart--item-qtmenos').style.color = "#999";
 c('.cart--item-qtmais').style.color = "#ea1d2c";
 
