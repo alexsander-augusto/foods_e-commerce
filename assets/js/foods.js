@@ -7,5 +7,5 @@ let foodJson = [
     { id: 6, name: 'Orlando', img: '././media/orlando.png', price: [0.00, 0.00, 26.00], sizes: ['140g'], description: 'Pão brioche, hambúrguer 140g, queijo prato e maionese especial.' },
     { id: 7, name: 'Batata Temperada', img: '././media/batata.png', price: [0.00, 0.00, 15.00], sizes: ['100g'], description: 'Fritas temperadas com orégano, sal, páprica e outras especiarias.' },
     { id: 8, name: 'Coca-Cola', img: '././media/cocacola.png', price: [0.00, 0.00, 5.00], sizes: ['350ml'], description: 'Coca-Cola Original Lata 350ml.' },
-    { id: 9, name: 'Guaraná Zero', img: '././media/guarana-zero.png', price: [0.00, 0.00, 5.00], sizes: ['350ml'], description: 'Guaraná Zero Lata 350ml.' }
+    { id: 9, name: 'Guaraná Zero', img: '././media/guarana-zero.png', price: [0.00, 0.00, 5.00], sizes: ['350ml'], description: 'Guaraná Zero Lata 350ml.' },
 ];

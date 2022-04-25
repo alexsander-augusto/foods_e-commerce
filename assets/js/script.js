@@ -2,20 +2,21 @@
 let cart = [];
 let modalQt = 1;
 let modalKey = 0;
+let currentPrice = 0;
 
 // Utilitários;
-const i = (el) => document.getElementById(el);
-const c = (el) => document.querySelector(el);
-const cs = (el) => document.querySelectorAll(el);
+const getElementById = (el) => document.getElementById(el);
+const querySelector = (el) => document.querySelector(el);
+const querySelectorAll = (el) => document.querySelectorAll(el);
 
 // Listagem das Comidas:
 foodJson.forEach((item, index) => {
 
     // Clona a estrutura .food-item;
-    let foodItem = c('.models .food-item').cloneNode(true);
+    let foodItem = querySelector('.models .food-item').cloneNode(true);
 
     // Adiciona os elementos clonados de 'foodItem' em 'food-area';
-    c('.food-area').append(foodItem);
+    querySelector('.food-area').append(foodItem);
 
     // Define uma chave pra cada item clicado;
     foodItem.setAttribute('data-key', index);
@@ -34,10 +35,10 @@ foodJson.forEach((item, index) => {
         e.preventDefault();
 
         // Exibe o Modal e define uma transição mais suave;
-        c('.foodWindowArea').style.opacity = 0;
-        c('.foodWindowArea').style.display = 'flex';
+        querySelector('.foodWindowArea').style.opacity = 0;
+        querySelector('.foodWindowArea').style.display = 'flex';
         setTimeout(() => {
-            c('.foodWindowArea').style.opacity = 1;
+            querySelector('.foodWindowArea').style.opacity = 1;
         }, 200);
         document.querySelector('body').style.overflow = 'hidden';
 
@@ -48,58 +49,58 @@ foodJson.forEach((item, index) => {
         modalKey = key;
 
         // Preenche as informações do item no Modal;
-        c('.foodBig img').src = foodJson[key].img;
-        c('.foodInfo h1').innerHTML = foodJson[key].name;
-        c('.foodInfo--desc').innerHTML = foodJson[key].description;
-        c('.foodInfo--actualPrice').innerHTML = `R$ ${foodJson[key].price[2].toFixed(2).toString().replace(".",",")}`;
-        cs('.foodDefault').forEach((size) => {
+        querySelector('.foodBig img').src = foodJson[key].img;
+        querySelector('.foodInfo h1').innerHTML = foodJson[key].name;
+        querySelector('.foodInfo--desc').innerHTML = foodJson[key].description;
+        querySelector('.foodInfo--actualPrice').innerHTML = `R$ ${foodJson[key].price[2].toFixed(2).toString().replace(".",",")}`;
+        querySelectorAll('.foodDefault').forEach((size) => {
             size.querySelector('span').innerHTML = `R$ ${foodJson[key].price[2].toFixed(2).toString().replace(".",",")}`;
         });
 
         // Exibe todos os itens da seção 'Opção';
-        cs('.foodInfo--size').forEach((size) => {
+        querySelectorAll('.foodInfo--size').forEach((size) => {
             size.style.display = 'flex';
-            c('.foodDefault').style.display = 'flex';
+            querySelector('.foodDefault').style.display = 'flex';
         });
 
         // Exibe os três tamanhos apenas para Pizzas e somente preço para o restante;
         if(foodJson[key].id <= 3) {
-            c('.foodDefault').style.display = 'none';
+            querySelector('.foodDefault').style.display = 'none';
         } else if (foodJson[key].id > 3) {
-            cs('.foodSize').forEach((size) => {
+            querySelectorAll('.foodSize').forEach((size) => {
                 size.style.display = 'none';
             });
-            c('.foodDefault').style.display = 'flex';
+            querySelector('.foodDefault').style.display = 'flex';
         };
 
         // Define a posição inicial do Radio Input;
-        i('checkLarge').checked = true;
+        getElementById('checkLarge').checked = true;
 
         // Preenche o valor das Pizzas e reseta a posição do Radio Input;        
-        i('checkSmall').addEventListener('click', () => {
-            i('checkSmall').checked = true;
+        getElementById('checkSmall').addEventListener('click', () => {
+            getElementById('checkSmall').checked = true;
             if(foodJson[key].sizes[0]) {
-                c('.foodInfo--actualPrice').innerHTML = `R$ ${foodJson[key].price[0].toFixed(2).toString().replace(".",",")}`;
+                querySelector('.foodInfo--actualPrice').innerHTML = `R$ ${foodJson[key].price[0].toFixed(2).toString().replace(".",",")}`;
             }
         });
-        i('checkMedium').addEventListener('click', () => {
-            i('checkMedium').checked = true;
+        getElementById('checkMedium').addEventListener('click', () => {
+            getElementById('checkMedium').checked = true;
             if(foodJson[key].sizes[1]) {
-                c('.foodInfo--actualPrice').innerHTML = `R$ ${foodJson[key].price[1].toFixed(2).toString().replace(".",",")}`;
+                querySelector('.foodInfo--actualPrice').innerHTML = `R$ ${foodJson[key].price[1].toFixed(2).toString().replace(".",",")}`;
             }
         });
-        i('checkLarge').addEventListener('click', () => {
-            i('checkLarge').checked = true;
+        getElementById('checkLarge').addEventListener('click', () => {
+            getElementById('checkLarge').checked = true;
             if(foodJson[key].sizes[2]) {
-                c('.foodInfo--actualPrice').innerHTML = `R$ ${foodJson[key].price[2].toFixed(2).toString().replace(".",",")}`;
+                querySelector('.foodInfo--actualPrice').innerHTML = `R$ ${foodJson[key].price[2].toFixed(2).toString().replace(".",",")}`;
             }
         });
 
         // Remove a class 'selected' do item;
-        c('.foodSize.selected').classList.remove('selected');
+        querySelector('.foodSize.selected').classList.remove('selected');
 
         // Preenche o tamanho das Pizzas;
-        cs('.foodSize').forEach((size, sizeIndex) => {
+        querySelectorAll('.foodSize').forEach((size, sizeIndex) => {
 
             // Adiciona a class 'selected' ao terceiro item (reseta a informação sempre que abrir o Modal);
             if(sizeIndex == 2) {
@@ -109,23 +110,23 @@ foodJson.forEach((item, index) => {
         });        
 
         // Reseta as observações no Text area;
-        i('foodObs').value = '';
+        getElementById('foodObs').value = '';
 
         // Reseta a quantidade de items sempre que abre o Modal;
         modalQt = 1;    
-        c('.foodInfo--qt').innerHTML = modalQt;
+        querySelector('.foodInfo--qt').innerHTML = modalQt;
     });
 });
 
 // Evento do botão de compartilhamento;
-let compartilharRed = i('compartilharImgRed');
-let compartilharWhite = i('compartilharImgWhite');
+let compartilharRed = getElementById('compartilharImgRed');
+let compartilharWhite = getElementById('compartilharImgWhite');
 
-c('.main-area--links a:last-child').addEventListener('mouseover', () => {
+querySelector('.main-area--links a:last-child').addEventListener('mouseover', () => {
     compartilharRed.style.display = 'none';
     compartilharWhite.style.display = 'flex';
 });
-c('.main-area--links a:last-child').addEventListener('mouseout', () => {
+querySelector('.main-area--links a:last-child').addEventListener('mouseout', () => {
     compartilharRed.style.display = 'flex';
     compartilharWhite.style.display = 'none';
 });
@@ -134,46 +135,56 @@ c('.main-area--links a:last-child').addEventListener('mouseout', () => {
 
 // Fecha o Modal;
 function closeModal() {
-    c('.foodWindowArea').style.opacity = 0;
+    querySelector('.foodWindowArea').style.opacity = 0;
     setTimeout(() => {
-        c('.foodWindowArea').style.display = 'none';
+        querySelector('.foodWindowArea').style.display = 'none';
     }, 500);
     document.querySelector('body').style.overflow = 'scroll';
+    currentPrice = 0;
 };
-cs('.foodInfo--cancelButtonImg, .foodInfo--cancelButtonMobileImg').forEach((item) => {
+querySelectorAll('.foodInfo--cancelButtonImg, .foodInfo--cancelButtonMobileImg').forEach((item) => {
     item.addEventListener('click', closeModal);
 });
 
 // Insere ação dos botões de quantidade;
-c('.foodInfo--qtmenos').addEventListener('click', () => {
+querySelector('.foodInfo--qtmenos').addEventListener('click', () => {
     if(modalQt > 2) {
         modalQt--;
-        c('.foodInfo--qt').innerHTML = modalQt;
+        querySelector('.foodInfo--qt').innerHTML = modalQt;
     } else if(modalQt = 2) {
-        c('.foodInfo--qtmenos').style.color = "#999";  
+        querySelector('.foodInfo--qtmenos').style.color = "#999";  
         modalQt--;
-        c('.foodInfo--qt').innerHTML = modalQt;              
+        querySelector('.foodInfo--qt').innerHTML = modalQt;              
     };
+    querySelector('.foodInfo--actualPrice').innerHTML = modalQt;
 });
-c('.foodInfo--qtmais').addEventListener('click', () => {
-    c('.foodInfo--qtmenos').style.color = "#ea1d2c";
+querySelector('.foodInfo--qtmais').addEventListener('click', () => {
+    querySelector('.foodInfo--qtmenos').style.color = "#ea1d2c";
     modalQt++;
-    c('.foodInfo--qt').innerHTML = modalQt;
+    querySelector('.foodInfo--qt').innerHTML = modalQt;
+    let multiPrice = 0;
+    if(currentPrice == 0) {
+        currentPrice = querySelector('.foodInfo--actualPrice').innerHTML.replace(/,?0+$/,'').replace(/\D+/g, '');
+        multiPrice = currentPrice * modalQt;
+    } else {
+        multiPrice = currentPrice * modalQt;
+    };
+    querySelector('.foodInfo--actualPrice').innerHTML = `R$ ${multiPrice.toFixed(2).toString().replace(".",",")}`;
 });
 
 // Insere ação de seleção dos tamanhos;
-cs('.foodSize').forEach((size) => {
+querySelectorAll('.foodSize').forEach((size) => {
     size.addEventListener('click', () => {
-        c('.foodSize.selected').classList.remove('selected');
+        querySelector('.foodSize.selected').classList.remove('selected');
         size.classList.add('selected');
     });
 });
 
 // Função de adicionar ao carrinho de compras;
-c('.foodInfo--addButton').addEventListener('click', () => {
-    let size = parseInt(c('.foodSize.selected').getAttribute('data-key'));
-    let foodObs = i('foodObs').value;
-
+querySelector('.foodInfo--addButton').addEventListener('click', () => {
+    let size = parseInt(querySelector('.foodSize.selected').getAttribute('data-key'));
+    let foodObs = getElementById('foodObs').value;
+    
     // Cria um identificador;
     let identifier = foodJson[modalKey].id+'@'+size;
 
@@ -191,46 +202,52 @@ c('.foodInfo--addButton').addEventListener('click', () => {
             qt: modalQt, // Insere a quantidade da comida;
             obs: 'Observação: '+foodObs+',' // Insere a observação sobre o pedido;
         });
-    }
+    };
+    
+    // Adiciona a contagem do carrinho de compras;
+    if(cart.length > 0) {
+        querySelector('.headerCart--Counter').style.display = 'flex';
+        querySelector('.headerCart--Counter span').innerHTML = cart.length;
+    };
 
     updateCart();
     closeModal();
 });
 
-c('.headerCart').addEventListener('click', () => {
+querySelector('.headerCart').addEventListener('click', () => {
     if(cart.length > 0) {
-        c('aside').classList.add('show');
+        querySelector('aside').classList.add('show');
     }
 });
-i('cancelButton').addEventListener('click', () => {
-    c('aside').classList.remove('show');
+getElementById('cancelButton').addEventListener('click', () => {
+    querySelector('aside').classList.remove('show');
 });
 
 // Função pra abrir e fechar o carrinho de compras mobile;
-c('.menu-openner').addEventListener('click', () => {
+querySelector('.menu-openner').addEventListener('click', () => {
     if(cart.length > 0) {
-        c('aside').style.left = '0';
+        querySelector('aside').style.left = '0';
     }
 });
-c('.menu-closer').addEventListener('click', () => {
-        c('aside').style.left = '100vw';
+querySelector('.menu-closer').addEventListener('click', () => {
+        querySelector('aside').style.left = '100vw';
 });
 
 // Define as cores inicias dos botões de quantidade do carrinho de compras;
-c('.cart--item-qtmenos').style.color = "#999";
-c('.cart--item-qtmais').style.color = "#ea1d2c";
+querySelector('.cart--item-qtmenos').style.color = "#999";
+querySelector('.cart--item-qtmais').style.color = "#ea1d2c";
 
 // Função pra atualizar o carrinho de compras;
 function updateCart() {
 
     // Atualiza o número de itens no carrinho de compras mobile;
-    c('.menu-openner span').innerHTML = cart.length;
+    querySelector('.menu-openner span').innerHTML = cart.length;
 
     if(cart.length > 0) {
-        c('aside').classList.add('show');
+        querySelector('aside').classList.add('show');
 
         // Reseta a listagem dos itens do carrinho de compras;
-        c('.cart').innerHTML = '';
+        querySelector('.cart').innerHTML = '';
 
         let subtotal = 0;
         let desconto = 0;
@@ -255,7 +272,7 @@ function updateCart() {
             };
 
             // Clona o carrinho de compras;
-            let cartItem = c('.models .cart--item').cloneNode(true);
+            let cartItem = querySelector('.models .cart--item').cloneNode(true);
 
             // Define o nome e tamanho das Pizzas;
             let foodSizeName;
@@ -282,33 +299,40 @@ function updateCart() {
                 if(cart[i].qt > 2) {
                     cart[i].qt--;
                 } else if(cart[i].qt == 2) {
-                    c('.cart--item-qtmenos').style.color = "#999";
+                    querySelector('.cart--item-qtmenos').style.color = "#999";
                     cart[i].qt--;
                 } else {
                     cart.splice(i, 1);
+                    querySelector('.headerCart--Counter span').innerHTML = cart.length;
+
+                    // Reseta a contagem do carrinho de compras;
+                    if(cart.length == 0) {
+                        querySelector('.headerCart--Counter').style.display = 'none';
+                    };
                 };
+
                 updateCart();
             });
             cartItem.querySelector('.cart--item-qtmais').addEventListener('click', () => {
-                c('.cart--item-qtmenos').style.color = "#ea1d2c";
+                querySelector('.cart--item-qtmenos').style.color = "#ea1d2c";
                 cart[i].qt++;
                 updateCart();
             });
 
             // Adiciona conteúdos a estrutura .cart-item;
-            c('.cart').append(cartItem);
-        }
+            querySelector('.cart').append(cartItem);
+        };
 
         desconto = subtotal * 0.1;
         total = subtotal - desconto;
 
         // Adiciona os valores no carrinho de compras;
-        c('.subtotal span:last-child').innerHTML = `R$ ${subtotal.toFixed(2)}`;
-        c('.desconto span:last-child').innerHTML = `R$ ${desconto.toFixed(2)}`;
-        c('.total span:last-child').innerHTML = `R$ ${total.toFixed(2)}`;
+        querySelector('.subtotal span:last-child').innerHTML = `R$ ${subtotal.toFixed(2)}`;
+        querySelector('.desconto span:last-child').innerHTML = `R$ ${desconto.toFixed(2)}`;
+        querySelector('.total span:last-child').innerHTML = `R$ ${total.toFixed(2)}`;
 
     } else {
-        c('aside').classList.remove('show');
-        c('aside').style.left = '100vw';
+        querySelector('aside').classList.remove('show');
+        querySelector('aside').style.left = '100vw';
     }
 };
