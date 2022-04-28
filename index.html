@@ -52,12 +52,17 @@
             </div>
         </div>
         <div class="cart--item">
-            <img src="" />
-            <div class="cart--item-nome">--</div>
-            <div class="cart--item--qtarea">
-                <button class="cart--item-qtmenos">-</button>
-                <div class="cart--item--qt">1</div>
-                <button class="cart--item-qtmais">+</button>
+            <div class="cart--item--main">
+                <!-- <img src="" /> -->
+                <div class="cart--item-nome">--</div>
+                <div class="cart--item--qtarea">
+                    <button class="cart--item-qtmenos">-</button>
+                    <div class="cart--item--qt">1</div>
+                    <button class="cart--item-qtmais">+</button>
+                </div>
+            </div>
+            <div class="cart--item--itemRemove">
+                <button>Remover</button>
             </div>
         </div>
     </div>    
@@ -76,7 +81,7 @@
                     <img src="./assets/images/relogio.png" alt="">
                     <p>45 - 60 min. |</p>
                     <img src="./assets/images/entrega.png" alt="">
-                    <p>R$ 11,00 |</p>
+                    <p>R$ 9,00 |</p>
                     <img src="./assets/images/cupom-de-desconto.png" alt="">
                     <p>Aceita cupom</p>                    
                 </div>
@@ -100,25 +105,38 @@
             <div class="menu-closer">
                 <img id="cancelButton" src="./assets/images/cancelButton.png" alt="">
             </div>
-            <h1>Suas foods</h1>
-            <div class="cart"></div>
+            <div class="cart--area--infos">
+                <img src="./assets/images/pizza.png" alt="">
+                <h1>Foods</h1>
+            </div>
+            <div class="cart--area--options">
+                <div class="cart"></div>
             <div class="cart--details">
                 <div class="cart--totalitem subtotal">
                     <span>Subtotal</span>
                     <span>R$ --</span>
                 </div>
-                <div class="cart--totalitem desconto">
-                    <span>Desconto (-10%)</span>
+                <div class="cart--totalitem taxa">
+                    <span>Taxa de entrega</span>
                     <span>R$ --</span>
                 </div>
                 <div class="cart--totalitem total big">
                     <span>Total</span>
                     <span>R$ --</span>
+                </div>                           
+            </div>            
+            </div> 
+            <div class="cart--area--finish">
+                <div class="cart--finishButton">
+                    Finalizar a compra
+                    <div class="cart--finish--price">
+                        <div class="cart--finish--actualPrice">R$ --</div>
+                    </div>
                 </div>
-                <div class="cart--finalizar">Finalizar a compra</div>
-            </div>
+            </div>           
         </div>
     </aside>
+    <div class="aside-closer"></div>
     <div class="foodWindowArea">
         <div class="foodWindowBody">
             <div class="foodInfo--cancelButton">

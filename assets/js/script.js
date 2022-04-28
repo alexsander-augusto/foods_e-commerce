@@ -81,19 +81,31 @@ foodJson.forEach((item, index) => {
             getElementById('checkSmall').checked = true;
             if(foodJson[key].sizes[0]) {
                 querySelector('.foodInfo--actualPrice').innerHTML = `R$ ${foodJson[key].price[0].toFixed(2).toString().replace(".",",")}`;
-            }
+            };
+            modalQt = 1;    
+            querySelector('.foodInfo--qt').innerHTML = modalQt;
+            querySelector('.foodInfo--qtmenos').style.color = "#999"; 
+            currentPrice = 0;
         });
         getElementById('checkMedium').addEventListener('click', () => {
             getElementById('checkMedium').checked = true;
             if(foodJson[key].sizes[1]) {
                 querySelector('.foodInfo--actualPrice').innerHTML = `R$ ${foodJson[key].price[1].toFixed(2).toString().replace(".",",")}`;
-            }
+            };
+            modalQt = 1;    
+            querySelector('.foodInfo--qt').innerHTML = modalQt;
+            querySelector('.foodInfo--qtmenos').style.color = "#999"; 
+            currentPrice = 0;
         });
         getElementById('checkLarge').addEventListener('click', () => {
             getElementById('checkLarge').checked = true;
             if(foodJson[key].sizes[2]) {
                 querySelector('.foodInfo--actualPrice').innerHTML = `R$ ${foodJson[key].price[2].toFixed(2).toString().replace(".",",")}`;
-            }
+            };
+            modalQt = 1;    
+            querySelector('.foodInfo--qt').innerHTML = modalQt;
+            querySelector('.foodInfo--qtmenos').style.color = "#999"; 
+            currentPrice = 0;
         });
 
         // Remove a class 'selected' do item;
@@ -140,11 +152,25 @@ function closeModal() {
         querySelector('.foodWindowArea').style.display = 'none';
     }, 500);
     document.querySelector('body').style.overflow = 'scroll';
+
+    // Reseta o preço atual do modal;
     currentPrice = 0;
 };
 querySelectorAll('.foodInfo--cancelButtonImg, .foodInfo--cancelButtonMobileImg').forEach((item) => {
     item.addEventListener('click', closeModal);
 });
+
+// Função dos botões de quantidade no modal;
+function multiPrice() {
+    let multiPrice = 0;
+    if(currentPrice == 0) {
+        currentPrice = querySelector('.foodInfo--actualPrice').innerHTML.replace(/,?0+$/,'').replace(/\D+/g, '');
+        multiPrice = currentPrice * modalQt;
+    } else {
+        multiPrice = currentPrice * modalQt;
+    };
+    return querySelector('.foodInfo--actualPrice').innerHTML = `R$ ${multiPrice.toFixed(2).toString().replace(".",",")}`;
+    };
 
 // Insere ação dos botões de quantidade;
 querySelector('.foodInfo--qtmenos').addEventListener('click', () => {
@@ -156,20 +182,15 @@ querySelector('.foodInfo--qtmenos').addEventListener('click', () => {
         modalQt--;
         querySelector('.foodInfo--qt').innerHTML = modalQt;              
     };
-    querySelector('.foodInfo--actualPrice').innerHTML = modalQt;
+    
+    multiPrice();
 });
 querySelector('.foodInfo--qtmais').addEventListener('click', () => {
     querySelector('.foodInfo--qtmenos').style.color = "#ea1d2c";
     modalQt++;
     querySelector('.foodInfo--qt').innerHTML = modalQt;
-    let multiPrice = 0;
-    if(currentPrice == 0) {
-        currentPrice = querySelector('.foodInfo--actualPrice').innerHTML.replace(/,?0+$/,'').replace(/\D+/g, '');
-        multiPrice = currentPrice * modalQt;
-    } else {
-        multiPrice = currentPrice * modalQt;
-    };
-    querySelector('.foodInfo--actualPrice').innerHTML = `R$ ${multiPrice.toFixed(2).toString().replace(".",",")}`;
+
+    multiPrice();
 });
 
 // Insere ação de seleção dos tamanhos;
@@ -203,24 +224,37 @@ querySelector('.foodInfo--addButton').addEventListener('click', () => {
             obs: 'Observação: '+foodObs+',' // Insere a observação sobre o pedido;
         });
     };
-    
-    // Adiciona a contagem do carrinho de compras;
-    if(cart.length > 0) {
-        querySelector('.headerCart--Counter').style.display = 'flex';
-        querySelector('.headerCart--Counter span').innerHTML = cart.length;
-    };
 
+    asideOpen();
     updateCart();
     closeModal();
+});
+
+
+function asideOpen() {
+    querySelector('.aside-closer').style.display = 'flex';
+    querySelector('html').style.overflow = 'hidden';
+}
+
+function asideCloser() {
+    querySelector('.aside-closer').style.display = 'none';
+    querySelector('html').style.overflow = 'scroll';   
+}
+
+querySelector('.aside-closer').addEventListener('click', () => {
+    querySelector('aside').classList.remove('show');
+    asideCloser();
 });
 
 querySelector('.headerCart').addEventListener('click', () => {
     if(cart.length > 0) {
         querySelector('aside').classList.add('show');
-    }
+        asideOpen();
+    };
 });
 getElementById('cancelButton').addEventListener('click', () => {
     querySelector('aside').classList.remove('show');
+    asideCloser();
 });
 
 // Função pra abrir e fechar o carrinho de compras mobile;
@@ -290,7 +324,7 @@ function updateCart() {
             let foodName = `${foodItem.name} (${foodSizeName})`;
 
             // Preenche as informações em .cart-item; 
-            cartItem.querySelector('img').src = foodItem.img;
+            // cartItem.querySelector('img').src = foodItem.img;
             cartItem.querySelector('.cart--item-nome').innerHTML = foodName;
             cartItem.querySelector('.cart--item--qt').innerHTML = cart[i].qt;
 
@@ -303,6 +337,9 @@ function updateCart() {
                     cart[i].qt--;
                 } else {
                     cart.splice(i, 1);
+                    if(cart.length == 0) {
+                        asideCloser();
+                    };
                     querySelector('.headerCart--Counter span').innerHTML = cart.length;
 
                     // Reseta a contagem do carrinho de compras;
@@ -319,16 +356,36 @@ function updateCart() {
                 updateCart();
             });
 
+            // Função do botão de remover itens;
+            cartItem.querySelector('.cart--item--itemRemove').addEventListener('click', () => {
+                cart.splice(i, 1);
+                if(cart.length == 0) {
+                    querySelector('.headerCart--Counter').style.display = 'none';
+                    asideCloser();
+                };
+                updateCart();
+            });
+
+            // Adiciona a contagem do carrinho de compras;
+            if(cart.length > 0) {
+                querySelector('.headerCart--Counter').style.display = 'flex'; 
+                querySelector('.headerCart--Counter span').innerHTML = cart.length;
+            };
+
             // Adiciona conteúdos a estrutura .cart-item;
             querySelector('.cart').append(cartItem);
         };
 
-        desconto = subtotal * 0.1;
-        total = subtotal - desconto;
+        // Cálculo do valor total;
+        taxa =  9;
+        total = subtotal + taxa;
+
+        // Atualiza o preço no botão de finalizar compra;
+        querySelector('.cart--finish--actualPrice').innerHTML = `R$ ${total.toFixed(2).toString().replace(".",",")}`;
 
         // Adiciona os valores no carrinho de compras;
         querySelector('.subtotal span:last-child').innerHTML = `R$ ${subtotal.toFixed(2)}`;
-        querySelector('.desconto span:last-child').innerHTML = `R$ ${desconto.toFixed(2)}`;
+        querySelector('.taxa span:last-child').innerHTML = `R$ ${taxa.toFixed(2)}`;
         querySelector('.total span:last-child').innerHTML = `R$ ${total.toFixed(2)}`;
 
     } else {
