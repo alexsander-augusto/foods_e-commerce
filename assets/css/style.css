@@ -825,6 +825,13 @@ main {
     .main-area--delivery p:last-child {
         display: none;
     }
+    .food-item--desc {
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 1;
+        -webkit-box-orient: vertical;
+    }
     .foodInfo--qtarea {
         margin-right: 20px;
     }
