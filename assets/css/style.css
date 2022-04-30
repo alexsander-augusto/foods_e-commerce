@@ -128,27 +128,6 @@ header {
     color: #fff;
     align-self: center;
 }
-.header-mobile {
-    position: fixed;
-    left:0;
-    top:0;
-    right:0;
-    height:60px;
-    background-color:#399ade;
-    display:none;
-    justify-content: flex-end;
-    align-items: center;
-}
-.menu-openner {
-    margin-right: 15px;
-    font-size: 26px;
-    background-color: #a9dcff;
-    padding: 5px 20px;
-    border-radius: 5px;
-}
-.menu-openner span {
-    margin-right:10px;
-}
 .models {
     display:none;
 }
@@ -173,6 +152,7 @@ aside {
     right: 0;
     z-index: 999;
     height: 100%;
+    background-color: #fff;
 }
 aside.show {
     width:30vw;
@@ -262,6 +242,14 @@ main {
     font-size: 16px;
     margin-left: 5px;
     font-weight: 300;
+}
+.main-area--clock,
+.main-area--delivery,
+.main-area--coupon {
+    display: flex;
+}
+.main-area--desc p:last-child {
+    margin-right: 5px;
 }
 .main-area--notice {
     display: flex;
@@ -764,86 +752,96 @@ main {
 
 @media (max-width:1000px) {
     .food-area {
-        grid-template-columns: repeat(2, 1fr);
+        display:flex;
+        flex-direction: column;
+    }
+    aside {
+        position: fixed;
+        right: 0;
+    }
+    aside.show {
+        width:40vw;
+    }
+    .cart--area {
+        width:40vw;
     }
 }
 @media (max-width:840px) {
-    body {
-        flex-direction: column;
-    }
     .food-area {
-        display:block;
+        display:flex;
+        flex-direction: column;
     }
     .food-item {
         max-width:100%;
-    }
-    .header-mobile {
-        display:flex;
-    }
-    main {
-        padding-top:60px;
+        margin-bottom: -10px;
     }
     aside {
-        width:auto;
-        position:fixed;
-        left:100vw;
-        right:0;
-        top:0;
-        bottom:0;
-        transition: all ease .2s;
+        position: fixed;
+        right: 0;
     }
     aside.show {
-        width:auto;
+        width:50vw;
     }
     .cart--area {
-        width:100vw;
+        width:50vw; 
     }
-    .menu-closer {
-        display:block;
+}
+@media (max-width:615px) {
+    .headerLocal h2, 
+    .headerCart h2 {
+        display: none;
     }
-    .foodWindowArea {
-        justify-content:flex-start;
-        align-items: flex-start;
+    .main-area {
+       flex-direction: column;
+       height: 100%;
+    } 
+    .main-area--logo img {
+       display: none;
     }
-    .foodWindowBody {
-        width:100vw;
-        display:block;
-        padding:20px;
-        border-radius:0;
-        box-shadow: 0px 0px 15px #999;
-        margin: auto;
-        margin-left: 20px;
-        margin-right: 20px;
+    aside.show {
+        width:70vw;
     }
-    .foodBig img {
-        height:200px;
-        width:auto;
-        border-radius: 5px;
-    }
-    .foodInfo h1 {
-        margin-top:20px;
-    }
-    .foodInfo--qtarea {
-        height:60px;
-    }
-    .foodInfo--qtarea button {
-        font-size:25px;
-        padding:0px 25px;
-    }
-    .foodInfo--qt {
-        line-height: 60px;
-        font-size:20px;
-    }
-    .foodInfo--addButton {
-        font-size:20px;
-        display:block;
-        text-align:center;
-        margin:30px auto;
+    .cart--area {
+        width:70vw; 
     }
     .foodInfo--cancelButton {
-        display:none;
+        width: 100%;
     }
-    .foodInfo--cancelMobileButton {
-        display:block;
+    .foodInfo--buyarea {
+       width: 100%;
+    }
+}
+@media (max-width:460px) {
+    .header {
+        gap: 10px;
+    }
+    .main-area--desc {
+        flex-direction: column;
+    }
+    .main-area--desc img {
+        width: 18px;
+    }
+    .main-area--clock p:last-child,
+    .main-area--delivery p:last-child {
+        display: none;
+    }
+    .foodInfo--qtarea {
+        margin-right: 20px;
+    }
+    .foodInfo--addButton {
+        flex-direction: column;
+        text-align: center;
+        margin-bottom: 20px;
+        padding-left: 10px;
+        padding-right: 10px;
+    }
+    .foodInfo--price {
+        display: inline;
+    }
+    aside.show {
+        width:100vw;
+    }
+    .cart--area {
+        width:100vw; 
     }
 }

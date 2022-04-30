@@ -9,6 +9,18 @@ const getElementById = (el) => document.getElementById(el);
 const querySelector = (el) => document.querySelector(el);
 const querySelectorAll = (el) => document.querySelectorAll(el);
 
+// getElementById('searchbar').addEventListener('keyup', () => {
+//     var search = getElementById('searchbar').value.toLowerCase();        
+//     console.log(search);
+//     for(var i = 0; i < foodJson.length; i++) {
+//        var verify = false;
+//        var foodArea = querySelector('.food-item');
+//        if(foodJson[i].id == 3) {
+//            foodJson.splice(i, 1);
+//        }
+//     };
+// });
+
 // Listagem das Comidas:
 foodJson.forEach((item, index) => {
 
@@ -257,25 +269,12 @@ getElementById('cancelButton').addEventListener('click', () => {
     asideCloser();
 });
 
-// Função pra abrir e fechar o carrinho de compras mobile;
-querySelector('.menu-openner').addEventListener('click', () => {
-    if(cart.length > 0) {
-        querySelector('aside').style.left = '0';
-    }
-});
-querySelector('.menu-closer').addEventListener('click', () => {
-        querySelector('aside').style.left = '100vw';
-});
-
 // Define as cores inicias dos botões de quantidade do carrinho de compras;
 querySelector('.cart--item-qtmenos').style.color = "#999";
 querySelector('.cart--item-qtmais').style.color = "#ea1d2c";
 
 // Função pra atualizar o carrinho de compras;
 function updateCart() {
-
-    // Atualiza o número de itens no carrinho de compras mobile;
-    querySelector('.menu-openner span').innerHTML = cart.length;
 
     if(cart.length > 0) {
         querySelector('aside').classList.add('show');
@@ -284,7 +283,6 @@ function updateCart() {
         querySelector('.cart').innerHTML = '';
 
         let subtotal = 0;
-        let desconto = 0;
         let total = 0;
 
         for(let i in cart) {
@@ -390,6 +388,5 @@ function updateCart() {
 
     } else {
         querySelector('aside').classList.remove('show');
-        querySelector('aside').style.left = '100vw';
     }
 };
