@@ -9,18 +9,6 @@ const getElementById = (el) => document.getElementById(el);
 const querySelector = (el) => document.querySelector(el);
 const querySelectorAll = (el) => document.querySelectorAll(el);
 
-// getElementById('searchbar').addEventListener('keyup', () => {
-//     var search = getElementById('searchbar').value.toLowerCase();        
-//     console.log(search);
-//     for(var i = 0; i < foodJson.length; i++) {
-//        var verify = false;
-//        var foodArea = querySelector('.food-item');
-//        if(foodJson[i].id == 3) {
-//            foodJson.splice(i, 1);
-//        }
-//     };
-// });
-
 // Listagem das Comidas:
 foodJson.forEach((item, index) => {
 
@@ -46,13 +34,8 @@ foodJson.forEach((item, index) => {
         // Previne a ação padrão (atualizar a página);
         e.preventDefault();
 
-        // Exibe o Modal e define uma transição mais suave;
-        querySelector('.foodWindowArea').style.opacity = 0;
-        querySelector('.foodWindowArea').style.display = 'flex';
-        setTimeout(() => {
-            querySelector('.foodWindowArea').style.opacity = 1;
-        }, 200);
-        document.querySelector('body').style.overflow = 'hidden';
+        // Abre o modal;
+        openModal();
 
         // Pega a chave do item clicado;
         let key = e.target.closest('.food-item').getAttribute('data-key');
@@ -156,6 +139,16 @@ querySelector('.main-area--links a:last-child').addEventListener('mouseout', () 
 });
 
 // Eventos do Modal:
+
+// Abre o Modal e define uma transição mais suave;
+function openModal() {
+    querySelector('.foodWindowArea').style.opacity = 0;
+    querySelector('.foodWindowArea').style.display = 'flex';
+    setTimeout(() => {
+        querySelector('.foodWindowArea').style.opacity = 1;
+    }, 200);
+    document.querySelector('body').style.overflow = 'hidden';
+};
 
 // Fecha o Modal;
 function closeModal() {
@@ -278,6 +271,7 @@ function updateCart() {
 
     if(cart.length > 0) {
         querySelector('aside').classList.add('show');
+        querySelector('.headerCart--Counter').style.display = 'flex'; 
 
         // Reseta a listagem dos itens do carrinho de compras;
         querySelector('.cart').innerHTML = '';
@@ -286,6 +280,8 @@ function updateCart() {
         let total = 0;
 
         for(let i in cart) {
+
+            
 
             // Acessa as informações da comida selecionada;
             let foodItem = foodJson.find((item) => item.id == cart[i].id);
@@ -335,15 +331,13 @@ function updateCart() {
                     cart[i].qt--;
                 } else {
                     cart.splice(i, 1);
-                    if(cart.length == 0) {
-                        asideCloser();
-                    };
-                    querySelector('.headerCart--Counter span').innerHTML = cart.length;
 
-                    // Reseta a contagem do carrinho de compras;
+                    // Reseta a contagem do carrinho de compras ;
                     if(cart.length == 0) {
                         querySelector('.headerCart--Counter').style.display = 'none';
+                        asideCloser();
                     };
+                    querySelector('.headerCart--Counter span').innerHTML = '';                    
                 };
 
                 updateCart();
@@ -355,7 +349,7 @@ function updateCart() {
             });
 
             // Função do botão de remover itens;
-            cartItem.querySelector('.cart--item--itemRemove').addEventListener('click', () => {
+            cartItem.querySelector('.cart--item--itemRemove button').addEventListener('click', () => {
                 cart.splice(i, 1);
                 if(cart.length == 0) {
                     querySelector('.headerCart--Counter').style.display = 'none';
@@ -365,13 +359,28 @@ function updateCart() {
             });
 
             // Adiciona a contagem do carrinho de compras;
-            if(cart.length > 0) {
-                querySelector('.headerCart--Counter').style.display = 'flex'; 
-                querySelector('.headerCart--Counter span').innerHTML = cart.length;
+            var sum = 0;
+            for(j = 0; j < cart.length; j++) {
+                sum += cart[j].qt;
             };
+            querySelector('.headerCart--Counter span').innerHTML = sum;
 
             // Adiciona conteúdos a estrutura .cart-item;
             querySelector('.cart').append(cartItem);
+            
+            querySelector('.cart--finishButton').addEventListener('click', () => {
+                querySelector('aside').classList.remove('show');
+                openModal();
+                asideOpen();
+                querySelector('.foodWindowBody').style.display = 'none';
+                querySelector('.foodWindowFinishBody').style.display = 'inline';
+                querySelector('.foodWindowFinishBody .foodBig img').src = './assets/images/verificado.png';
+            });
+
+            // Função pra recarregar a página;
+            querySelector('.foodWindowFinishBody .foodInfo--cancelButtonImg').addEventListener('click', () => {
+                location.reload();
+            });
         };
 
         // Cálculo do valor total;

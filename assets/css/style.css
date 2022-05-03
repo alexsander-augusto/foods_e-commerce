@@ -419,17 +419,6 @@ main {
     height: 16px;
     cursor: pointer;
 }
-.foodInfo--cancelMobileButton {
-    display:none;
-    height:40px;
-    text-align:center;
-    line-height: 40px;
-    margin-bottom:30px;
-}
-.foodInfo--cancelMobileButton img {
-    height: 16px;
-    cursor: pointer;
-}
 .foodInfo--buyarea {
     display: flex;
     justify-content: end;
@@ -618,6 +607,27 @@ main {
     margin-bottom: 30px;  
     outline: 0;  
 }
+.foodWindowFinishBody {
+    display:none;
+    width:600px;
+    background-color:#FFF;
+    border-radius:10px;
+    box-shadow:0px 0px 15px #999;
+    margin:20px 0px;  
+    height: 100%;  
+    overflow-y:scroll;
+    z-index: 999;
+}
+.foodWindowFinishBody .foodBig{
+    background-color: #fff;
+}
+.foodWindowFinishBody .foodBig img {
+    height: 100px;
+}
+.foodWindowFinishBody .foodInfo h1 {
+    color: #ea1d2c;
+    margin-bottom: 15px;
+}
 .cart--area--options {
     height: 100%;
     overflow-y: auto;
@@ -750,11 +760,14 @@ main {
     background-color:#a51620;
 }
 
-@media (max-width:1000px) {
+@media (max-width:1110px) {
     .food-area {
         display:flex;
         flex-direction: column;
+        width: 100%;
     }
+}
+@media (max-width:1000px) {
     aside {
         position: fixed;
         right: 0;
