@@ -29,7 +29,14 @@ Os usuários devem ser capazes de:
 
 ### Screenshot
 
-![foods_e-commerce project]()
+- Desktop
+
+![foods_e-commerce project](./media/desktop-version.png)
+![foods_e-commerce project](./media/desktop-version-cart.png)
+
+- Mobile 
+
+![foods_e-commerce project](./media/mobile-version.png)
 
 ## My process
 
