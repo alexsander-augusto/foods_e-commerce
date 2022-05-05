@@ -224,6 +224,7 @@ querySelector('.foodInfo--addButton').addEventListener('click', () => {
         cart.push({
             identifier,
             id: foodJson[modalKey].id, // Insere o id da comida;
+            name: foodJson[modalKey].name, // Insere o nome da comida;
             size, // Insere o tamanho da comida;
             qt: modalQt, // Insere a quantidade da comida;
             obs: 'Observação: '+foodObs+',' // Insere a observação sobre o pedido;
@@ -278,10 +279,9 @@ function updateCart() {
 
         let subtotal = 0;
         let total = 0;
+        
 
-        for(let i in cart) {
-
-            
+        for(let i in cart) {            
 
             // Acessa as informações da comida selecionada;
             let foodItem = foodJson.find((item) => item.id == cart[i].id);
@@ -306,16 +306,19 @@ function updateCart() {
             let foodSizeName;
             switch(cart[i].size) {
                 case 0:
-                    foodSizeName = 'P';
+                    foodSizeName = '- (P)';
                     break;
                 case 1: 
-                    foodSizeName = 'M';
+                    foodSizeName = '- (M)';
                     break;
                 case 2:
-                    foodSizeName = 'G';
+                    foodSizeName = '- (G)';
                     break;
             };
-            let foodName = `${foodItem.name} (${foodSizeName})`;
+            if(cart[i].id > 3) {
+                foodSizeName = '';
+            }
+            let foodName = `${foodItem.name} ${foodSizeName}`;
 
             // Preenche as informações em .cart-item; 
             // cartItem.querySelector('img').src = foodItem.img;
@@ -358,16 +361,37 @@ function updateCart() {
                 updateCart();
             });
 
-            // Adiciona a contagem do carrinho de compras;
+            // Adiciona a contagem do carrinho de compras e informações da estrutura .foodWindowFinishBody;;
             var sum = 0;
+            var cartQtd = '';
+            var cartName = ''; 
+            var cartSize = '';     
             for(j = 0; j < cart.length; j++) {
                 sum += cart[j].qt;
+                cartQtd += 'x'+cart[j].qt + '<br>';
+                switch(cart[j].size) {
+                    case 0:
+                        cartSize = ' - (P)';
+                        break;
+                    case 1: 
+                    cartSize = ' - (M)';
+                        break;
+                    case 2:
+                        cartSize = ' - (G)';
+                        break;
+                };
+                if(cart[j].id > 3) {
+                    cartSize = '';   
+                };
+                cartName += cart[j].name + cartSize + '<br>';             
+                console.log(cartSize);
             };
             querySelector('.headerCart--Counter span').innerHTML = sum;
 
             // Adiciona conteúdos a estrutura .cart-item;
             querySelector('.cart').append(cartItem);
             
+            // Função do botão de finalizar compras;
             querySelector('.cart--finishButton').addEventListener('click', () => {
                 querySelector('aside').classList.remove('show');
                 openModal();
@@ -381,6 +405,10 @@ function updateCart() {
             querySelector('.foodWindowFinishBody .foodInfo--cancelButtonImg').addEventListener('click', () => {
                 location.reload();
             });
+
+            // Adiciona conteúdos a estrutura .foodWindowFinishBody;
+            querySelector('.foodWindowFinishBody .food-item--qt').innerHTML = cartQtd;
+            querySelector('.foodWindowFinishBody .food-item--name').innerHTML = cartName;        
         };
 
         // Cálculo do valor total;
@@ -390,12 +418,20 @@ function updateCart() {
         // Atualiza o preço no botão de finalizar compra;
         querySelector('.cart--finish--actualPrice').innerHTML = `R$ ${total.toFixed(2).toString().replace(".",",")}`;
 
+        // Adiciona o valor total da estrutura .foodWindowFinishBody;
+        querySelector('.foodWindowFinishBody .food-item--total').innerHTML = `Total: R$ ${total.toFixed(2).toString().replace(".",",")}`;
+
         // Adiciona os valores no carrinho de compras;
         querySelector('.subtotal span:last-child').innerHTML = `R$ ${subtotal.toFixed(2)}`;
         querySelector('.taxa span:last-child').innerHTML = `R$ ${taxa.toFixed(2)}`;
         querySelector('.total span:last-child').innerHTML = `R$ ${total.toFixed(2)}`;
 
+        // Função pra recarregar a página;
+        querySelector('.foodInfo--pageReload').addEventListener('click', () => {
+            location.reload();
+        });
     } else {
+        // Remove o carrinho de compras;
         querySelector('aside').classList.remove('show');
     }
 };
