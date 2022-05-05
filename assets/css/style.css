@@ -873,6 +873,9 @@ footer a:hover {
     .cart--area {
         width:50vw; 
     }
+    .cart--area--finish {
+        padding-right: 75px;
+    }
 }
 @media (max-width:615px) {
     .headerLocal h2, 
