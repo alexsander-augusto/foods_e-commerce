@@ -9,7 +9,6 @@ body {
     font-family:'Nunito',Helvetica,Arial;
     font-size:15px;
     display:flex;
-    flex-direction:column;
     margin:0;
     min-height:100vh;
     justify-content: center;
@@ -194,6 +193,7 @@ main {
     justify-content: space-around;
     flex-direction: column;
     align-items: center;
+    margin-bottom: 50px;
 }
 .main-area {
     background-color: #fff;
@@ -811,16 +811,19 @@ main {
 .cart--finishButton:hover {
     background-color:#a51620;
 }
-footer{
-    background-color: #fff;
+footer{    
+    bottom: 0;
+    position: fixed;
     height: 40px;
-    color: #000;
+    width: 100%;
     font-size: 12px; 
-    text-align: center; 
+    text-align: center;
+    background-color: #fff;
+    z-index: 997;
     box-shadow: rgb(0 0 0 / 8%) 0px 0.2rem 0.4rem;
     display: flex;
     align-items: center;
-    justify-content: center;    
+    justify-content: center;
 }
 footer a { 
     color: #ea1d2c;

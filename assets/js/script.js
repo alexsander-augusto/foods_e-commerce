@@ -156,7 +156,7 @@ function closeModal() {
     setTimeout(() => {
         querySelector('.foodWindowArea').style.display = 'none';
     }, 500);
-    document.querySelector('body').style.overflow = 'scroll';
+    document.querySelector('body').style.overflowY = 'scroll';
 
     // Reseta o preço atual do modal;
     currentPrice = 0;
@@ -244,7 +244,7 @@ function asideOpen() {
 
 function asideCloser() {
     querySelector('.aside-closer').style.display = 'none';
-    querySelector('html').style.overflow = 'scroll';   
+    querySelector('html').style.overflowY = 'scroll';   
 }
 
 querySelector('.aside-closer').addEventListener('click', () => {
