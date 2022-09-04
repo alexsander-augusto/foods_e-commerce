@@ -3,7 +3,7 @@
 Este é um projeto que simula um site de compra de comidas, totalmente responsivo. 
 
 - O código Javascript se encontra totalmente comentado para fácil entendimento sobre as lógicas utilizadas.
-- Live Site URL: [Foods E-commerce](https://shootowned.github.io/foods_e-commerce/)
+- Live Site URL: [Foods E-commerce](https://alexsander-augusto.github.io/foods_e-commerce/)
 
 ## Welcome! 👋
 
@@ -59,7 +59,7 @@ Este projeto deixou explícito alguns pontos em que ainda tenho dificuldades, co
 
 ## Author
 
-- Website - [Github/Shootowned](https://github.com/shootowned)
-- Linkedin - [@alexsander-augusto-developer](https://www.linkedin.com/in/alexsander-augusto-developer/)
+- Website - [Portfolio](https://dev-alexsander.vercel.app/)
+- Linkedin - [@alexsander-augusto](https://www.linkedin.com/in/alexsander-augusto/)
 
 Obrigado por conferir este projeto. 🔥
